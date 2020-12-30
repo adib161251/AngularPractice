@@ -1,0 +1,38 @@
+<h2>User Form</h2>
+<form #f="ngForm" (ngSubmit)="submit(f)">
+    <div id="select">
+        <div class="form-group">
+            <label for="userName">User Name</label>
+            <input required ngModel id="userName" #userName="ngModel" (change)="log(userName)" name="userName" type="text" class="form-control"/>
+            <div class="alert alert-danger" *ngIf="userName.touched && !userName.valid">User Name is Required</div>
+        </div>
+        <div *ngFor="let contact of contacts" class="radio" >
+            <label>
+                <input ngModel type="radio" (click)="contactMethod(contact.id)" name="contactMethod" [value]="contact.id"/>
+                {{contact.type}}
+            </label>
+        </div>
+        
+        <div class="form-group" [hidden]="isHiddenEmail">
+            <label for="email">E-Mail</label>
+            <input ngModel id="email" name="email" type="email" class="form-control" [disabled]="isDisableEmail"/>
+        </div>
+        <div class="form-group"  [hidden]="isHiddenCell">
+            <label for="cell">Mobile Number</label>
+            <input ngModel id="cell" name="cell" type="text" [disabled]="isDisableCell" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input ngModel id="dob" name="dob" type="date" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="livein">Home In</label>
+            <select ngModel name="livein" id="livein" class="form-control">
+                <option  value="" selected disabled hidden>Select</option>
+                <option *ngFor="let method of liveIn" [ngValue]="method">{{method.district}}</option>
+            </select>
+        </div>  
+    </div>
+    <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Save</button>    
+    <button type="button" (onclick)="addNew()" class="btn btn-primary">Add</button>
+</form>
