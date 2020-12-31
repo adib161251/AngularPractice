@@ -1,0 +1,24 @@
+<h1>{{courses.length+' '+ loop()}}</h1>
+<ul>
+    <li *ngFor="let course of courses">
+        {{course}}
+    </li>
+</ul>
+<button (click)="onClick($event)">Save</button>
+<input type="text" name="test" (keyup)="onKeyup($event)"/><br/>
+<input type="text" #email (keyup.enter)="enter(email.value)" placeholder="check for enter"/>
+<!--<input type="text" [value]="valuee" (keyup.enter) ="valuee=$event.target.value; twowayBinding()" placeholder="Email"/>-->
+<br>
+<input type="text" [(ngModel)]="valuee" (keyup.enter)="twowayBinding()" placeholder="ngModel"/>
+<div>
+    <p>{{course.title | uppercase}}</p>
+    <p>{{course.rating | number:'1.2-2'}}</p>
+    <p>{{course.students |number}}</p>
+    <p>{{course.releaseDate | date:'shortDate'}}</p>
+    <p>{{text| summary:100}}</p>
+</div>
+
+
+
+
+

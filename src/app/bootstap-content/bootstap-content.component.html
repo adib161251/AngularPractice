@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <ng-content select=".heading"></ng-content>
+    </div>
+    <div class="panel-body">
+        <ng-content select=".body"></ng-content>
+        <div *ngIf="courses.length >0; then thiss else thatt"></div>
+        <ng-template #thiss><b>True Block</b></ng-template>
+        <ng-template #thatt><b>Else block</b></ng-template>
+    </div>
+</div>
+<ul class="nav nav-pills">
+    <li [class.active]="viewModel == 'map'"><button (click)="viewModel='map'">MAP</button></li>
+    <li [class.active]="viewModel == 'list'"><button (click)="viewModel='list'">ListView</button></li> 
+</ul>
+<div [ngSwitch]="viewModel">
+    <div *ngSwitchCase="'map'">Map View was selected</div>
+    <div *ngSwitchCase="'list'">List View was selected</div>
+    <div *ngSwitchDefault>Othewise</div>
+</div>
+<button [disabled]="isDisable" (click)="onAdd()" >ADD</button>
+<button (click)="onLoad()">Load</button>
+<ul>
+    <li [id]="value" *ngFor="let course of courses; even as isEven">
+        {{course}} <button (click)="onRemove(course)">Remove</button>
+    </li>
+</ul>
+<input type="text" appInputFormat/> 
